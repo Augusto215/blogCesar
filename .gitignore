@@ -1,0 +1,15 @@
+# Arquivos de Bytecode Python
+__pycache__/
+*.py[cod]
+
+# Arquivos de ambiente virtual
+nome_do_ambiente_virtual/
+
+# Arquivos de banco de dados SQLite (caso você esteja usando)
+*.sqlite3
+
+# Arquivos de mídia (Você pode querer ajustar isso dependendo da sua configuração)
+media/
+
+# Arquivos de configuração sensíveis
+settings.py

@@ -1,0 +1,34 @@
+
+<div class="modal-container">
+    <div class="modal">
+       <button class="fechar_modal">x</button>
+       <form action="{% url 'blog:cadastro' %}" method="POST">{% csrf_token %}
+          <h1>Registre-se agora, e interaja com nossos posts ;)</h1>
+          <label for="user">Usuário</label>
+          <input type="text" name="user" maxlength="12" required placeholder="Usuário">
+          <label for="name">Nome</label>
+          <input type="text" name="name" required placeholder="Nome Completo">
+          <label for="cp2f">C.P.F</label>
+          <input type="text" maxlength="11" minlength="11" name="cpf" id="cpf" required placeholder="C.P.F">
+          <label for="email">Email</label>
+          <input type="email" name="email" required placeholder="Email">
+          <label for="senha">Senha</label>
+          <input type="password" name="senha" required placeholder="Senha">
+          <label for="confirmar_senha">Repetir Senha</label>
+          <input type="password" name="confirmar_senha" required placeholder="Confirmar senha">
+           
+          <div class="checkPolitica">
+            <span style="width: auto;
+            margin-right: 2rem; text-align:left; margin-top:.5rem;"><span style="text-align:right;">Eu li e aceito a</span>&nbsp;<span style="text-decoration:underline; cursor:pointer;"class="politica">Política de Privacidade</span> </span>
+            <div class="inputPolicy" style="display:flex; justify-content:left;">
+            <input style="    box-shadow: none;
+            border: none;
+            width:1.3rem !important; margin-top:.5rem !important;"type="checkbox" id="privacyPolicy" required>
+            </div>
+        </div>
+    
+          <button type="submit" class="login_btn">Registrar-se</button>
+          <a class="open-modal2">Já possui um login? Entre agora!</a>
+       </form>
+    </div>
+ </div>

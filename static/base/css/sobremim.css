@@ -1,0 +1,143 @@
+.sobremim
+{
+    width:100%;
+    display: flex;
+    justify-content: center;
+   
+
+}
+.main-sobremim
+{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+}
+.container-sobremim
+{
+    margin:auto;
+}
+.sobremim-text
+{
+    word-break:break-word;
+}
+.sobremim-main-container
+{   margin: 2rem 0;
+    width:80%;
+    text-align: left;
+}
+.sobremim-main-container img
+{   width:15rem;
+    height:12.5rem;
+    margin-right:.6rem;
+    border: solid #fff 2px;
+    box-shadow: 5px 5px #000;
+}
+
+.body-night .sobremim-main-container img
+{
+    border: solid #000 2px;
+    box-shadow: 5px 5px #363636;
+}
+.sobremim h1
+{
+  
+    text-align: left;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem; 
+}
+.sobremim-container 
+{
+    width:90%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap:.5rem;
+
+}
+
+.linha-sobremim
+{
+    width: 80%;
+    background-color: #fff;
+    text-align: center;
+    height:.2rem;
+    margin: auto;
+}
+.body-night .linha-sobremim
+{
+    background-color: #000;
+    height: .2rem;
+    border:#000;
+
+}
+.trabalhos
+{
+    width:90%;
+    text-align: right;
+}
+.body-night .trabalhos
+{
+    font-weight: 600;
+}
+.social-sobremim ul
+{
+    width:90%;
+    text-align: right;
+    display: flex;
+}
+.social-sobremim ul img 
+{
+    height:3rem;
+}
+.social-sobremim img
+{
+    height: 1.2rem;
+}
+
+.dot {
+    width: .3rem; /* Largura do ponto */
+    height: .3rem; /* Altura do ponto */
+    background-color: rgb(255, 255, 255); /* Cor do ponto */
+    border-radius: 50%; /* Para tornar o ponto circular */
+}
+.body-night .dot
+{
+    background-color: #000;
+}
+.grid-sobremim
+{   margin-top: .4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: .5rem; /* Espaçamento entre os elementos */
+    width: 8rem; /* Largura do grid */
+    height: 8rem; /* Altura do grid */
+    justify-items: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+}
+.sobremim-flex
+{   margin: auto;
+    display: flex;
+    width:80%;
+    justify-content: space-between;
+}
+.social-flex2
+{
+    width:80%;
+    display: flex;
+    margin:auto;
+    justify-content: right;
+}
+.grid-sobremim2
+{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Agora são 5 colunas */
+    grid-template-rows: repeat(3, 1fr); /* Mantemos 3 linhas */
+    gap: .5rem;
+    width: 18rem; /* Aumentamos a largura do grid */
+    height: 8rem;
+    justify-items: center;
+    align-items: center;
+    margin-bottom:1.5rem;
+}

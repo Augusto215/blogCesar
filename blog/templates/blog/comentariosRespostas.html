@@ -1,0 +1,48 @@
+
+<div class="modal-main-resposta">
+    <div class="modal-resposta">
+        <button onclick="fechar_modal_respostas()" class="modal-resposta-fechar">x</button>
+        <div class="comment-section">
+            <div class="comment">
+                <img src="{{comment.author.image.url}}" alt="avatar" class="avatar">
+                <div class="content">
+                    {% for comment in comments %}
+                    <h3 class="username comentario-author" >a</h3>
+                    <p class="comment-text comentario-content ">a</p>
+                    {%endfor%}
+                </div>
+            </div>
+            <div class="reply">
+                <img src="{{usuario.image.url}}" alt="avatar" class="avatar">
+                <div class="content">
+                    <h3 class="username">{{usuario.userName}}</h3>
+                    {% if comment %}
+
+                    <form class="respostaForm" method="POST" action="{% url 'blog:enviar_resposta' comment.id %}">
+                        {%else%}
+                        <form class="respostaForm" method="POST" >
+                            {%endif%}
+
+                        {% csrf_token %}
+                        <input type="text" name="resposta" placeholder="Digite sua resposta aqui" required>
+                        <input type="hidden" class="comment-id-field" value="{{ comment.id }}" />
+
+                        <button type="submit">Enviar</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<div class="modal-main-ler-respostas">
+    <div class="modal-ler-respostas">
+        <button class="ver-resposta-fechar"> X
+        </button>
+
+          
+    </div>
+
+</div>
+

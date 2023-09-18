@@ -1,0 +1,41 @@
+{%if messages%}
+
+{% for message in messages %}
+
+<div class="alert-container is-active" >
+    <div class="alert">
+       <button class="fechar_alert">x</button>
+      <h1 class="alert-text"  style="text-align:center; margin:auto; font-size:1.3rem; ">
+      
+        
+        {{message}}
+      
+    
+    </h1>
+    </div>
+ </div>
+
+ <script>
+  const fecharAlert = document.querySelector('.fechar_alert')
+  const alertContainer = document.querySelector('.alert-container')
+  
+  fecharAlert.addEventListener('click', function()
+  {
+     alertContainer.classList.remove('is-active')
+  
+  })
+  
+  alertContainer.addEventListener('click', function(event)
+  {
+     if(event.target === alertContainer)
+     {
+        alertContainer.classList.remove('is-active')
+     }
+  })
+  
+       </script>
+ {% endfor %}
+
+ {% endif %}
+
+ 

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block  'conteudo' %}
+<section class="contatos">
+   <div class="main-flex-contatos">
+      <div class="contatos-item1">
+        <a href="#"><img class="tiktok-contato tiktok-footer" src="{% static 'base/img/tiktok.png'%}"></a>
+        <a href="#"><img class="twitter-contato twitter-footer" src="{% static 'base/img/twitter.png'%}"></a>
+         <a href="#"><img class="instagram-contato ig-footer" src="{% static 'base/img/instagram(semfundo).png'%}"></a>
+        
+         <a href="#"><img class="youtube-contato yt-footer" src="{% static 'base/img/youtube(semfundo).png'%}"></a>
+         <a href="#"><img class="linkedin-contato linkedin-footer" src="{% static 'base/img/linkedin.png'%}"></a>
+        <a style="display:none;" href="#"> <img class="gmail-contato gmail-footer" src="{% static 'base/img/gmail.png'%}"></a>
+         <a style="display:none;"href="#"><img class="discord-contato ds-footer" src="{% static 'base/img/discord.png'%}"></a>
+      </div>
+      <div class="contatos-item2" >
+         <div class="contatos-square">
+          <img class="ig-square ig-footer" style="display:flex; height:5rem; display:none;" src="{% static 'base/img/instagram(semfundo).png'%}">
+          <img class="twitter-square twitter-footer" style=" display:none; height:5rem; align-items:center;" src="{% static 'base/img/twitter.png'%}">
+          <img class="yt-square yt-footer" style="height:5rem; display:none;" src="{% static 'base/img/youtube(semfundo).png'%}">
+          <img class="linkedin-square linkedin-footer" style="display:none;height:5rem;"src="{% static 'base/img/linkedin.png'%}">
+          <img class="tiktok-square tiktok-footer" style="display:flex; height:5rem;"src="{% static 'base/img/tiktok.png'%}">
+         </div>
+         <div id="twitter"  style="display:none; height:50rem; border-radius:8px">
+            <iframe src='https://widgets.sociablekit.com/twitter-feed/iframe/163927' frameborder='0' width='100%' height='100%'></iframe>
+         </div>
+         <div id="instagram" style="height:50rem; display:none; border-radius:8px; background-color:#fff; ">
+       <!-- Place <div> tag where you want the feed to appear -->
+         <iframe src='https://widgets.sociablekit.com/instagram-feed/iframe/163932' frameborder='0' width='100%' height='100%'></iframe>
+         </div>
+      
+      <div id="tiktok" style="background-color:#000; height:50rem; border-radius:8px; display:flex;">
+       
+         <iframe src='https://widgets.sociablekit.com/tiktok-feed/iframe/163937' frameborder='0' width='100%' height='100%'></iframe>
+      </div>
+      
+
+      <div id="youtube" style="background-color:#000;display:none; height:50rem; border-radius:8px;" ;>
+         <iframe src='https://widgets.sociablekit.com/youtube-channel-videos/iframe/163938' frameborder='0' width='100%' height='100%'></iframe>
+   </div>
+   <div id="linkedin" style="display:none; height:50rem; border-radius:8px;">
+      <iframe src='https://widgets.sociablekit.com/linkedin-profile-posts/iframe/163929' frameborder='0' width='100%' height='100%'></iframe>
+
+   </div>
+</section>
+
+{% endblock %}
+
+{% block 'js' %}
+<script src="{% static 'base/js/contato.js'%}"></script>
+<script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+
+
+{% endblock  %}

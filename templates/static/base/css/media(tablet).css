@@ -1,0 +1,24 @@
+@media(max-width:80rem)
+{
+nav h1
+{  
+    font-size: 19px !important;
+    right:15%;
+ 
+   
+}
+
+.grid-container {
+
+    width:90% !important;
+    grid-template-columns: 1fr !important;
+
+
+
+  }
+
+  .grid-text h1 
+  {
+    text-align: center !important;
+  }
+}

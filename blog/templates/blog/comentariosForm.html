@@ -1,0 +1,34 @@
+
+<form method="post" action="{%url "blog:enviar_comentario" post.id%}" class="comentario-form form-hidden" data-postid="{{ post.id }}">
+
+    {%csrf_token%}
+ 
+   
+    {%if usuario%}
+    <div class="main-comentario">
+        <div class="align-label">
+    <label for="comentario">Deixe seu comentário:</label>
+    <textarea type="text" class="input_comentario" required name="comentario"></textarea>
+    <input type="hidden" name="post-id" value="{{ post.id }}">
+</div><button type="submit" class="input-comentario-submit" >
+</button>
+</div>
+
+    {%else%}
+    <div class="main-comentario" onclick="alertComentario()">
+        <div class="align-label">
+    <label for="comentario">Deixe seu comentário:</label>
+    <textarea type="text" class="input_comentario" required name="comentario" disabled></textarea>
+</div><button type="submit" class="input-comentario-submit" disabled>
+</button>
+</div>
+
+    {%endif%}
+
+    
+    
+    
+</div>
+</div>
+</form>
+

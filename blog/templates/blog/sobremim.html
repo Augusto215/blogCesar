@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'css' %}
+   <link rel="stylesheet" href="{% static 'base/css/sobremim.css' %}">
+{% endblock  %}
+
+{% block  'conteudo' %}
+<section class="main-sobremim">
+   <div class="container-sobremim">
+<section class="sobremim">
+   {% for sobre_mim in sobre_mim %}
+   <div class="sobremim-main-container">
+      <h1>{{sobre_mim.titulo}}</h1>
+      <div class="sobremim-container">
+         <div class="sobremim-img">
+            <img src="{{sobre_mim.image.url}}">
+         </div>
+         <div class="sobremim-container2">
+         <div class="sobremim-text">
+            
+               {{sobre_mim.sobre_mim|safe}}
+            
+         </div>
+         <span style="font-weight:600; margin-top:1rem; cursor:pointer;"class="ler-mais-sobremim">
+            Ler mais...
+         </span>
+         
+       
+         <div class="lerSobremim-container">
+            <div class="modal-artigos" style="width:85%; background-color:#2a2a2d;
+            border:solid #fff 2px; padding:.8rem; position:relative;">
+            <div style="overflow-y:scroll; height:10rem;">
+           {{sobre_mim.sobre_mim|safe}}</div>
+               <button class="fechar-sobremim" style="
+                  position: absolute;
+                  top: -15px;
+                  right: -15px;
+                  width: 2rem;
+                  height: 2rem;
+                  z-index: 999;
+                  border-radius: 50%;
+                  border: 2px solid #fff;
+                  background-color: rgb(54,54,54);
+                  font-size: 1.3em;
+                  color: #fff;
+                  cursor: pointer;
+                  box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                  outline:none;"
+                  >x</button>
+            </div>
+         </div>
+      </div>
+      </div>
+   </div>
+   {% endfor %}
+</section>
+<div class="linha-container">
+   <p class="trabalhos">Onde encontrar meus trabalhos:</p>
+   <hr class="linha-sobremim">
+   <div class="sobremim-flex">
+      <div class="grid-sobremim">
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+      </div>
+      <div class="social-sobremim">
+         <ul>
+            <a href="{{redes_sociais.Lattes}}" target="_blank"><img class="lattes-footer" src="{% static 'base/img/A.png'%}"></a>
+            <a href="{{redes_sociais.Linkedin}}" target="_blank"><img class="linkedin-footer" src="{% static 'base/img/linkedin.png'%}"></a>
+            <a href="{{redes_sociais.medium}}" target="_blank"><img class="orcid-footer" src="{% static 'base/img/medium(semfundo).png'%}"></a>
+         </ul>
+      </div>
+   </div>
+   <div class="social-flex2">
+      <div class="grid-sobremim2">
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+         <div class="dot"></div>
+      </div>
+   </div>
+</div>
+</div>
+</div>
+</section>
+{% endblock %}
+
+{% block 'js' %}
+<script src="{% static 'base/js/sobremim.js'%}"></script>
+<script src="/static/base/js/clamp.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var myElement = document.querySelector('.sobremim-text');
+    if (myElement) {
+      $clamp(myElement, {clamp: 11});
+    } else {
+      console.log('.sobremim-text not found');
+    }
+  });
+</script>
+
+
+      
+         
+      
+      <script>
+   
+         function checkOverflowSobremim() {
+            var collapsesSobremim = document.querySelectorAll('.sobremim-text');
+            var verMais1ButtonsSobremim = document.querySelectorAll('.ler-mais-sobremim');
+         
+         
+   
+          
+   
+            collapsesSobremim.forEach((collapse, index) => {
+                var isOverflowingSobremim = collapse.scrollHeight > collapse.clientHeight || collapse.scrollWidth > collapse.clientWidth;
+        
+                if (isOverflowingSobremim) {
+                    // Mostrar o botão correspondente
+                    verMais1ButtonsSobremim[index].style.display = 'block';
+                   
+                } else {
+                    // Esconder o botão correspondente e mostrar os comentários
+                    verMais1ButtonsSobremim[index].style.display = 'none';
+             
+                }
+            });
+        
+        }
+      
+      
+        // Verifica o overflow quando a página é carregada
+        window.addEventListener('DOMContentLoaded', checkOverflowSobremim);
+        
+        // Verifica o overflow sempre que a janela é redimensionada
+        window.addEventListener('resize', checkOverflowSobremim);
+        
+      
+        
+    
+      </script>
+
+   <script>
+      let lerSobremimContainer = document.querySelector('.lerSobremim-container')
+      let lerSobremim = document.querySelector('.ler-mais-sobremim')
+      let fecharSobremim = document.querySelector('.fechar-sobremim')
+
+
+      lerSobremim.addEventListener('click', function()
+      {
+         lerSobremimContainer.classList.add('is-active')
+      })
+
+      fecharSobremim.addEventListener('click', function()
+      {
+         lerSobremimContainer.classList.remove('is-active')
+      })
+
+      lerSobremimContainer.addEventListener('click', function(event)
+      {  event.stopPropagation()
+         if(event.target === lerSobremimContainer)
+         {
+            lerSobremimContainer.classList.remove('is-active')
+         }
+      })
+   </script>
+      
+{% endblock  %}

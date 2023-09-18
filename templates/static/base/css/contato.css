@@ -1,0 +1,87 @@
+.contatos
+{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+
+}
+
+.main-flex-contatos
+{
+  margin: 8rem 0;
+  display: flex;
+  width: 100%;
+  margin: 8rem auto;
+  padding: 0 6%;
+  justify-content: center;
+
+}
+
+
+.contatos-item2
+{
+  width:100%;
+  max-width:40rem;
+  position: relative;
+  box-shadow:10px 10px #000;
+ border-radius: 12px;
+  border: #fff solid 2px;
+  background-position-y:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position-x:center;
+}
+
+.contatos-item1
+{
+  height: 35rem;
+  width: 5%;
+  display: block;
+  align-items: center;
+  margin-right: 10rem;
+  
+
+}
+
+.contatos-item1 img
+{
+    height: 5rem;
+    width:auto;
+    cursor:pointer;
+}
+.contatos-square {
+  position: absolute;
+  left: 50%;
+  top: -7.5%;
+  border: #fff solid 2px;
+  background-color: #2a2a2d;
+  border-radius: .5rem;
+  transform: translateX(-50%);
+  box-shadow: 5px 5px #000;
+  background-position-y:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position-x:center;
+  z-index: 2;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.body-night .contatos-square
+{
+  background-color: #a4a4a4;
+  box-shadow: 5px 5px #363636;
+  border:#000 solid 2px !important;
+}
+.body-night .contatos-item2
+{
+  box-shadow: 7px 7px #363636;
+  border:#000 2px solid !important;
+}
+
+#twitter, #instagram, #youtube
+{
+  height: 50rem;
+}

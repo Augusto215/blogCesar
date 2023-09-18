@@ -1,0 +1,31 @@
+
+
+
+
+<div class="modal-container2">
+    <div class="modal2">
+       <button class="fechar_modal2">x</button>
+<form method="POST" action="{%url 'blog:update_profile' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+   
+
+   
+    <label for="nomeUsuario">Novo usuário:</label><br>
+    <input type="text"  name="atualizarNome" ><br>
+
+    <label for="image"> Nova imagem do perfil:</label><br>
+    <input style="height:100%;" id="fileInput" type="file"  name="image"><br>
+
+    <label for="email">Novo email:</label><br>
+    <input type="text" name="atualizarEmail" ><br>
+
+
+ 
+
+    <button class="login_btn" type="submit" >Atualizar</button>
+
+    <a class="openSenha">Mudar senha </a>
+</form>
+
+</div>
+</div>

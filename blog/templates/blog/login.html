@@ -1,0 +1,13 @@
+<div class="modal-container1">
+    <div class="modal1">
+       <button class="fechar_modal1">x</button>
+       <form action="{%url 'blog:validar_login'%}" method="POST" > {% csrf_token %} 
+          <h1>É uma honra te ver por aqui!</h1>
+          <label for="nome">Email</label>
+          <input type="name" name="email" required placeholder="Email">
+          <label for="pass">Senha</label>
+          <input type="password" name="senha" required placeholder="Senha">
+          <button type="submit" class="login_btn">Entrar</button>
+       </form>
+    </div>
+ </div>

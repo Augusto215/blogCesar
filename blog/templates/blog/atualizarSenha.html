@@ -1,0 +1,26 @@
+<div class="modal-container3">
+    <div class="modal3">
+       <button class="fechar_modal3">x</button>
+<form method="POST" action="{%url 'blog:update_profile' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+   
+
+   
+    <label for="nomeUsuario">Nova senha:</label><br>
+    <input type="password"  name="atualizarSenha" ><br>
+
+
+
+    <label for="email">Confirmar senha:</label><br>
+    <input type="password" name="confirmar_senha" ><br>
+
+
+ 
+
+    <button class="login_btn" type="submit" >Atualizar</button>
+
+    
+</form>
+
+</div>
+</div>

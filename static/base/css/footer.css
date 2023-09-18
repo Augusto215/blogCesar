@@ -1,0 +1,83 @@
+footer
+{   
+    display: flex;
+    width:100%;
+    justify-content: center;
+display: flex;
+    height:3.7rem;
+
+  
+  
+
+}
+footer .footer-box
+{ width:90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid #fff 2px;
+    background-color: #2a2a2d;
+    box-shadow: 10px 10px #000;
+    z-index: 1;
+    height:3.2rem;
+    align-items: center;
+    
+
+  
+}
+.body-night .footer-box
+{
+  background-color: #e9e9e9;
+  color:#000;
+  border:solid #000 2px;
+  box-shadow: 5px 5px #3c3c3c;
+}
+.social-box
+{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.direitos
+{
+  margin-right: .6rem;
+  font-size: .6rem;
+
+}
+.direitos p
+{
+  font-weight: 700;
+}
+
+footer p 
+{
+  
+  font-size:1em;
+  font-weight: 500;
+  
+}
+.social-links-footer
+{
+  display: flex;
+align-items: center;
+justify-content: center;
+
+
+
+}
+
+.social-links-footer li
+{
+  list-style: none;
+}
+.social-links-footer li a 
+{
+  margin: 0 .3em;
+  font-size: 1em;
+  margin:0 auto;
+}
+.footer-img img
+{
+  height:2.3rem;
+}

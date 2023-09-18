@@ -1,0 +1,20 @@
+<div class="modal-add-comentario"> 
+    <div class="modal-main-comentario">
+    <button class="fechar_modal_comentario">x</button>
+    <div class="modal-comentario">
+    <div class="modal-comentario-header">
+        <img {%if usuario%}src="{{usuario.image.url}}"{%endif%} alt="user profile picture">
+        <h3 style="text-align:center;">{{post.titulo}}</h3>
+    </div>
+    <div>
+        <form method="post" class="comentario-form respostaForm" id="respostaForm">
+            {% csrf_token %}
+            <input type="hidden" name="comment_id" id="comment-id-field" value="">  
+            <input class="comment-box" type="text" required name="comentario" placeholder="Adicione um comentário..."/>
+            <input type="hidden" name="post-id" value="{{ post.id }}">
+            <button style="width: 5rem; margin: 1rem auto; display: flex; justify-content: center; text-align: center; box-shadow: 4px 4px #000; border: none; outline: none; padding: 0.6rem 5rem; font-size: 1rem; font-weight: 600; border-radius: 5px; color: #FFF; background-color: #3c3c3c;" class="comment-box-submit" type="submit">Enviar</button>
+        </form>
+    </div>
+    </div>
+    </div>
+</div>
