@@ -58,6 +58,8 @@ class Post(models.Model):
             # Salva a imagem recortada de volta no caminho original
             img.save(self.image.path)
 
+
+
 class Comment(models.Model):
     author = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     content = models.TextField()
