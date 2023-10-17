@@ -43,4 +43,3 @@ class PostProxyWithoutVideo(Post):
 admin.site.register(PostProxyWithVideo, PostWithVideoAdmin)
 admin.site.register(PostProxyWithoutVideo, PostWithoutVideoAdmin)
 admin.site.register(Comment)
-admin.site.register(Aswner)

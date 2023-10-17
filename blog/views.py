@@ -21,7 +21,7 @@ import traceback
 # Create your views here.
 from collections import defaultdict
 def home(request,page=1):
-    post_list = Post.objects.order_by("-data")  
+    post_list = Post.objects.exclude(video__isnull=False).exclude(video__exact='').order_by("-data")
     paginator = Paginator(post_list, 10)  # Mostra 5 posts por página
     page_obj = paginator.get_page(page)
 
@@ -37,6 +37,26 @@ def home(request,page=1):
     }
 
     return render(request, 'blog/cesar.html', context)
+
+def video_page(request, page=1):
+    video_posts = Post.objects.exclude(video__isnull=True).exclude(video__exact='').order_by("-data")
+    paginator = Paginator(video_posts, 10)  
+    page_obj = paginator.get_page(page)
+
+    redes_sociais = Contato.objects.all()
+    usuario = None
+    if 'usuario' in request.session:
+        usuario = Usuario.objects.get(id=request.session['usuario'])
+
+
+    context = {
+        'page_obj': page_obj,
+        'usuario': usuario,
+        'redes_sociais': redes_sociais
+    }
+
+    return render(request, 'blog/video_page.html', context)
+
 
 def post_comment(request):
     if request.method == 'POST':

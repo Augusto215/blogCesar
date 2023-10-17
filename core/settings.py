@@ -90,7 +90,7 @@ else:
  DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db_dev.sqlite3',
+            'NAME': BASE_DIR / 'db_dev2.sqlite3',
         }
     }
 # Password validation
@@ -170,13 +170,13 @@ JAZZMIN_SETTINGS = {
     "site_header": "CESAR BECK POLITIK",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "CESAR BECK POLITIK",
+    "site_brand": "Painel Admin",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": LOGO_IMAGE,
+    "site_logo": None,
     
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": LOGO_IMAGE,
+    "login_logo": None,
 
     # Logo to use for login form in dark themes (defaults to login_logo)
     "login_logo_dark": None,
@@ -308,7 +308,7 @@ JAZZMIN_SETTINGS = {
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
     "footer_small_text": False,
-    "body_small_text": False,
+    "body_small_text": True,
     "brand_small_text": False,
     "brand_colour": False,
     "accent": "accent-primary",
@@ -326,7 +326,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_legacy_style": True,
     "sidebar_nav_flat_style": False,
     "theme": "solar",
-    "dark_mode_theme": None,
+    "dark_mode_theme": "superhero",
     "button_classes": {
         "primary": "btn-primary",
         "secondary": "btn-secondary",

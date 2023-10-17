@@ -1,0 +1,842 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block  'conteudo' %}
+{% if usuario %}
+<p style="width:85%; margin:3rem auto 0; display:flex; align-items:center; text-align:left;"> Olá, &nbsp; <img  style="width:2rem; height:2rem; border-radius:50%;" src="{{usuario.image.url}}"> &nbsp; {{ usuario.userName }}!</p>
+{% endif %}
+<section id="postagens">
+<section class="align-auto" style="margin:auto;">
+
+   {% for post in page_obj %}
+   {%comment%} Post.Audio {%endcomment%}
+   {% if post.audio and not post.image.name and not post.post and not post.video %}
+   <div class="audio-container" style="width:100%; display:flex; justify-content:center; margin:4rem auto -2rem; flex-direction:column;">
+      <h1 style="margin: 2rem auto -2rem;  text-align:left; width:85%; ">{{post.titulo}}</h1>
+      <iframe class="iframe-audio responsive-iframe" style="margin:2rem auto !important; width:85% !important; border-radius:12px; height:100% !important;"data-src="{{post.audio}}" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
+   </div>
+   {%comment%}Post1 {%endcomment%}
+  
+   {% elif post.image.name == ''%}
+   <div class="post">
+   <div class="post-container">
+      <div class="div-text">
+         <div class="flex-titulo2">
+            <div class="post-titulo2">
+               <h1>
+                  {%if post.link_popup%}
+                  <a class="abrir-popup" >
+                     <div class="modal-container-popup">
+                        <div class="modal-popup" style="position:relative">
+                           <iframe "iframe-popup" data-src="{{post.link_popup}}"  width="100%" height="80%" allow="autoplay"></iframe>
+                           <button class="fechar-modal-popup" style="
+                              position: absolute;
+                              top: -15px;
+                              right: -15px;
+                              width: 2rem;
+                              height: 2rem;
+                              z-index: 999;
+                              border-radius: 50%;
+                              border: 2px solid #fff;
+                              background-color: rgb(54,54,54);
+                              font-size: 1.3em;
+                              color: #fff;
+                              cursor: pointer;
+                              box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                              outline:none;"
+                              >x</button>
+                        </div>
+                     </div>
+                 
+                     {{post.titulo}}
+                  </a>
+                  {%else%}
+                  {{post.titulo}}
+                  {%endif%}
+               </h1>
+            </div>
+            {% if post.subtitulo %}
+            <div class="post-subtitulo">
+               <h1>
+                  {{post.subtitulo}}
+               </h1>
+            </div>
+            {% endif %}
+         </div>
+      </div>
+      <div class="post-box">
+         <div class="post-text collapse">
+            <p class="post-box-p">
+               {%if post.link_popup%}
+               <a class="abrir-popup" >
+            <div class="modal-container-popup">
+            <div class="modal-popup" style="position:relative">
+            <iframe class="iframe-popup" data-src="{{post.link_popup}}"  width="100%" height="80%" allow="autoplay"></iframe>
+            <button class="fechar-modal-popup" style="
+               position: absolute;
+               top: -15px;
+               right: -15px;
+               width: 2rem;
+               height: 2rem;
+               z-index: 999;
+               border-radius: 50%;
+               border: 2px solid #fff;
+               background-color: rgb(54,54,54);
+               font-size: 1.3em;
+               color: #fff;
+               cursor: pointer;
+               box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+               outline:none;"
+               >x</button>
+            </div>
+            </div>
+            {{post.post|safe}}
+            </a>
+            {%else%}
+            {{post.post|safe}}
+            {%endif%}
+            </p>
+         </div>
+         <div class="ler-mais-div">
+            <a class="ler-mais1">Ler mais...</a>
+         </div>
+         <div class="post1-comentarios comentarios1" style="display:flex !important;">
+            {%if usuario%}
+            <div class="add-comentario-box" onclick="addComentario()" data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+            </div>
+            {%else%}
+            <div class="add-comentario-box" onclick="alertComentario()" data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+            </div>
+            {%endif%}
+            {% comment %}? COMENTARIO {% endcomment %}
+            <div class="comentario-box">
+               <button  class="comentario-box-fechar"  style="
+                  position:absolute; top:0; right:5px; display:none; color:#fff;
+                  background:none; outline:none;  font-size:1.5rem;
+                  border:none; cursor:pointer;" >     
+               x
+               </button>
+               <img class="comentario-box-img" src="{% static '/base/img/comment (2).png'%}">
+               {%include 'blog/comentarios.html'%}
+            </div>
+         </div>
+         <div class="postNovo-ler-mais" style="display:none;
+            width:100%; height:100vh; position:fixed; top:0; left:0;
+            z-index:999; justify-content:center;
+            align-items:center; background:rgba(0,0,0,.4)"
+            >
+            <div class="post1-modal" style="width:85%; background-color:#2a2a2d;
+               border:solid #fff 2px; padding:.8rem; position:relative;">
+               <button class="postNovo-fechar_modal" style=" position: absolute;
+                  top:-20px;
+                  right:-20px;
+                  width:2em;
+                  height:2em;
+                  border-radius: 50%;
+                  border: 2px solid #fff;
+                  background-color: rgb(54, 54, 54);
+                  font-size:1.3em;
+                  cursor:pointer;
+                  box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                  color:#fff;">x</button>
+               <div class="ver-mais1-text" style="overflow-y:scroll; word-break:break-word; height:15rem;margin-bottom: 4.5rem;">
+                  {{post.post|safe}} 
+               </div>
+               <div class="post1-comentarios" style="display:flex;">
+                  {%if usuario%}
+                  <div class="add-comentario-box" onclick="addComentario()" data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+                  </div>
+                  {%else%}
+                  <div class="add-comentario-box" onclick="alertComentario()" data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+                  </div>
+                  {%endif%}
+                  {% comment %}? COMENTARIO {% endcomment %}
+                  <div class="comentario-box">
+                     <button  class="comentario-box-fechar"  style="
+                        position:absolute; top:0; right:5px; display:none; color:#fff;
+                        background:none; outline:none;  font-size:1.5rem;
+                        border:none; cursor:pointer;" >     
+                     x
+                     </button>
+                     <img class="comentario-box-img" src="{% static '/base/img/comment (2).png'%}">
+                     {%include 'blog/comentarios.html'%}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div> 
+
+   {% comment %}? POST 2 {% endcomment %}
+   {% else %}
+   <div class="post2">
+      <div class="post-container2">
+        <div class="div-text1">
+            {%if post.video%}
+            <div class="post-container2-img  abrir-post-video">
+               {%else%}
+               <div class="post-container2-img">
+                  {%endif%}
+                  {%if post.video%}
+                  <img class="play-btn" style="width:5rem; height:5rem;border:none !important; box-shadow:none !important;" src="/static/base/img/botaoplay.png">
+      
+                  <img src="{{post.image.url}}">
+          
+      
+                  {%elif post.link_popup and not post.video %}
+                  
+                  
+                  <a class="abrir-popup" style="width:100%; height:100%" >
+                      <div class="modal-container-popup">
+                         <div class="modal-popup" style="position:relative">
+                            <iframe class="iframe-popup" data-src="{{post.link_popup}}"  width="100%" height="80%" allow="autoplay"></iframe>
+                            <button class="fechar-modal-popup" style="
+                               position: absolute;
+                               top: -15px;
+                               right: -15px;
+                               width: 2rem;
+                               height: 2rem;
+                               z-index: 999;
+                               border-radius: 50%;
+                               border: 2px solid #fff;
+                               background-color: rgb(54,54,54);
+                               font-size: 1.3em;
+                               color: #fff;
+                               cursor: pointer;
+                               box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                               outline:none;"
+                               >x</button>
+                         </div>
+                      </div>
+                     <img src="{{post.image.url}}">
+                   </a>
+                   {%else%}
+                   <img src="{{post.image.url}}">
+                   {%endif%}
+                  
+                  
+               
+               </div>
+            </div>
+         <div class="div-text2">
+            <div class="flex-titulo2">
+               <div class="post-titulo2">
+                  <h1>
+                     {%if post.link_popup%}
+                     <a class="abrir-popup" >
+                        <div class="modal-container-popup">
+                           <div class="modal-popup" style="position:relative">
+                              <iframe class="iframe-popup" data-src="{{post.link_popup}}"  width="100%" height="80%" allow="autoplay"></iframe>
+                              <button class="fechar-modal-popup" style="
+                                 position: absolute;
+                                 top: -15px;
+                                 right: -15px;
+                                 width: 2rem;
+                                 height: 2rem;
+                                 z-index: 999;
+                                 border-radius: 50%;
+                                 border: 2px solid #fff;
+                                 background-color: rgb(54,54,54);
+                                 font-size: 1.3em;
+                                 color: #fff;
+                                 cursor: pointer;
+                                 box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                                 outline:none;"
+                                 >x</button>
+                           </div>
+                        </div>
+                        {{post.titulo}}
+                     </a>
+                     {%else%}
+                     {{post.titulo}}
+                     {%endif%}
+                  </h1>
+               </div>
+               {% if post.subtitulo %}
+               <div class="post-subtitulo">
+                  <h1>
+                     &nbsp;- {{post.subtitulo}}
+                  </h1>
+               </div>
+               {% endif %}
+            </div>
+            <div class="post-box2">
+               <p class="post-box-p2">
+               <div class="post-text1 collapse2">
+              
+                  {%if post.link_popup%}
+                  <a class="abrir-popup" >
+               <div class="modal-container-popup">
+               <div class="modal-popup" style="position:relative">
+               <iframe class="iframe-popup" data-src="{{post.link_popup}}"  width="100%" height="80%" allow="autoplay"></iframe>
+               <button class="fechar-modal-popup" style="
+                  position: absolute;
+                  top: -15px;
+                  right: -15px;
+                  width: 2rem;
+                  height: 2rem;
+                  z-index: 999;
+                  border-radius: 50%;
+                  border: 2px solid #fff;
+                  background-color: rgb(54,54,54);
+                  font-size: 1.3em;
+                  color: #fff;
+                  cursor: pointer;
+                  box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                  outline:none;"
+                  >x</button>
+               </div>
+               </div>
+               {{post.post|safe}}
+               </a>
+               {%else%}
+               {{post.post|safe}}
+               {%endif%}
+           
+            </div>
+         </p>
+               <div class="ler-mais-div2">
+                  <span style="margin-top:.5rem; font-weight:600; cursor:pointer;" class="ler-mais2">Ler mais...</span>
+               </div>
+               <div class="post-box2-fonte">
+                  <a href="{{post.link_fonte}}"target="_blank">
+                     <h3>[link da matéria]</h3>
+                  </a>
+                  <h3>Fonte:&nbsp;{{post.font}}</h3>
+               </div>
+            </div>
+            <div class="post2-ler-mais" style="display:none;
+            width:100%; height:100vh; position:fixed; top:0; left:0;
+            z-index:999; justify-content:center;
+            align-items:center; background:rgba(0,0,0,.4)"
+            >
+            <div class="post2-modal" style="width:85%; background-color:#2a2a2d;
+               border:solid #fff 2px; padding:.8rem; position:relative;">
+               <button class="post2-fechar_modal" style=" position: absolute;
+                  top:-20px;
+                  right:-20px;
+                  width:2em;
+                  height:2em;
+                  border-radius: 50%;
+                  border: 2px solid #fff;
+                  background-color: rgb(54, 54, 54);
+                  font-size:1.3em;
+                  cursor:pointer;
+                  box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                  color:#fff;">x</button>
+               <div class="ver-mais2-text" style="overflow-y:scroll; word-break:break-word; height:15rem;">
+                  {{post.post|safe}}
+               </div>
+               <div class="post2-comentarios" style="justify-content:right !important; margin: auto !important;">
+                  {%if usuario%}
+                  <div class="add-comentario-box" onclick="addComentario()"  data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+                  </div>
+                  {%else%}
+                  <div class="add-comentario-box" onclick="alertComentario()"  data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+                  </div>
+                  {%endif%}
+                  <div class="comentario-box">
+                     <button  class="comentario-box-fechar"  style="
+                        position:absolute; top:0; right:5px; display:none; color:#fff;
+                        background:none; outline:none;  font-size:1.5rem;
+                        border:none; cursor:pointer;" >     
+                     x
+                     </button>
+                     <img class="comentario-box-img" src="{% static '/base/img/comment (2).png'%}">
+                     {%include 'blog/comentarios.html'%}
+                  </div>
+               </div>
+            </div>
+         </div>
+            {% comment %}? COMENTARIO {% endcomment %}
+            <div class="post2-comentarios comentarios2">
+               {%if usuario%}
+               <div class="add-comentario-box" style="display:none;" onclick="addComentario()" data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+               </div>
+               {%else%}
+               <div class="add-comentario-box" style="display:none;" onclick="alertComentario()" data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+               </div>
+               {%endif%}
+               <div class="comentario-box">
+                  <button  class="comentario-box-fechar"  style="
+                     position:absolute; top:0; right:5px; display:none; color:#fff;
+                     background:none; outline:none;  font-size:1.5rem;
+                     border:none; cursor:pointer;" >     
+                  x
+                  </button>
+                  <img class="comentario-box-img" src="{% static '/base/img/comment (2).png'%}">
+                  {%include 'blog/comentarios.html'%}
+               </div>
+               {%include 'blog/comentariosForm.html'%}
+               {%if post.video%}
+               <div class="modal-container-video">
+                  <div class="modal-video" style="position:relative">
+                     <iframe class="responsive-iframe" data-src="{{post.video}}"  width="100%" height="80%" allow="autoplay"></iframe>
+                     <button class="fechar-modal-video" style="
+                        position: absolute;
+                        top: -15px;
+                        right: -15px;
+                        width: 2rem;
+                        height: 2rem;
+                        z-index: 999;
+                        border-radius: 50%;
+                        border: 2px solid #fff;
+                        background-color: rgb(54,54,54);
+                        font-size: 1.3em;
+                        color: #fff;
+                        cursor: pointer;
+                        box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                        outline:none;"
+                        >x</button>
+                     {% comment %}? COMENTARIO {% endcomment %}
+                     <div class="post2-comentarios">
+                        {%if usuario%}
+                        <div class="add-comentario-box" onclick="addComentario()" data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+                        </div>
+                        {%else%}
+                        <div class="add-comentario-box" onclick="alertComentario()" data-post-id="{{ post.id }}" data-post-title="{{post.titulo}}"><img class="add-comentario-img" src="{% static '/base/img/message (1).png'%}">
+                        </div>
+                        {%endif%}
+                        <div class="comentario-box">
+                           <button  class="comentario-box-fechar"  style="
+                              position:absolute; top:0; right:5px; display:none; color:#fff;
+                              background:none; outline:none;  font-size:1.5rem;
+                              border:none; cursor:pointer;" >     
+                           x
+                           </button>
+                           <img class="comentario-box-img" src="{% static '/base/img/comment (2).png'%}">
+                           {%include 'blog/comentarios.html'%}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {%endif%}
+            </div>
+         </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      <div class="pagination-div">
+         <ul class="pagination pagination-home">
+            {% if page_obj.has_previous %}
+            <li><a href="{% url 'blog:video_page_post' page_obj.previous_page_number %}">&lt;</a></li>
+            {% endif %}
+            <li><a class="active" href="#0">{{ page_obj.number }}</a></li>
+            {% if page_obj.has_next %}
+            <li><a href="{% url 'blog:video_page_post' page_obj.next_page_number %}">&gt;</a></li>
+            {% endif %}
+         </ul>
+      </div>
+   </div>
+</section>
+</section>
+{%include 'blog/comentariosFormModal.html'%}
+{% include 'blog/comentariosRespostas.html' %}
+{%include 'blog/alertComentario.html'%}
+{% endblock  %}
+{% block 'js' %}
+<script src="https://fast.wistia.com/embed/medias/tq05i69fjl.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+<script src="{% static 'base/js/app.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clamp.js/0.5.1/clamp.min.js"></script>
+
+<script>
+   function checkOverflow() {
+       var collapses = document.querySelectorAll('.collapse');
+       var verMais1Buttons = document.querySelectorAll('.ler-mais1');
+       var Comentarios1 = document.querySelectorAll('.comentarios1');
+   
+       collapses.forEach((collapse, index) => {
+           var isOverflowing = collapse.scrollHeight > collapse.clientHeight || collapse.scrollWidth > collapse.clientWidth;
+   
+           if (isOverflowing) {
+               // Mostrar o botão correspondente
+               verMais1Buttons[index].style.display = 'block';
+               Comentarios1[index].style.display = 'none';
+           } else {
+               // Esconder o botão correspondente e mostrar os comentários
+               verMais1Buttons[index].style.display = 'none';
+               Comentarios1[index].style.display = 'flex';
+           }
+       });
+   }
+
+   // Verifica o overflow quando a página é carregada
+   window.addEventListener('DOMContentLoaded', checkOverflow);
+   
+   // Verifica o overflow sempre que a janela é redimensionada
+   window.addEventListener('resize', checkOverflow);
+   
+</script>
+
+<script>
+
+   function checkOverflow2() {
+      var collapses2 = document.querySelectorAll('.collapse2');
+      var verMais1Buttons2 = document.querySelectorAll('.ler-mais2');
+      var Comentarios12 = document.querySelectorAll('.comentarios2');
+      console.log('collapses2 length:', collapses2.length);
+      console.log('verMais1Buttons2 length:', verMais1Buttons2.length);
+      collapses2.forEach((collapse, index) => {
+          var isOverflowing2 = collapse.scrollHeight > collapse.clientHeight || collapse.scrollWidth > collapse.clientWidth;
+  
+          if (isOverflowing2) {
+              // Mostrar o botão correspondente
+              verMais1Buttons2[index].style.display = 'block';
+             
+          } else {
+              // Esconder o botão correspondente e mostrar os comentários
+              verMais1Buttons2[index].style.display = 'none';
+       
+          }
+      });
+  
+  }
+
+
+  // Verifica o overflow quando a página é carregada
+  window.addEventListener('DOMContentLoaded', checkOverflow2);
+  
+  // Verifica o overflow sempre que a janela é redimensionada
+  window.addEventListener('resize', checkOverflow2);
+  
+</script>
+
+
+<script>
+   $(document).ready(function(){
+   
+       // Função para adicionar eventos aos elementos
+       function addEventListeners() {
+           // Evento de clique para exibir formulário de resposta
+           document.querySelectorAll('.comentario-responder').forEach(function(element) {
+               element.addEventListener('click', function() {
+                   var commentId = this.getAttribute('data-comment-id');
+                   var formActionUrl = "/resposta/" + commentId + "/";
+   
+                   document.querySelector('.comment-id-field').value = commentId;
+                   document.querySelector('.respostaForm').setAttribute('action', formActionUrl);
+                   document.querySelector('.modal-main-resposta').classList.add('is-active');
+               });
+           });
+   
+           // Evento de clique para exibir respostas
+           document.querySelectorAll('.comentarios-repostas').forEach(function(element) {
+               element.addEventListener('click', function() {
+                   var commentId = this.getAttribute('data-comment-id');
+                   var respostaList = document.querySelector('.respostas-list[data-comment-id="' + commentId + '"]');
+                   respostaList.classList.toggle('is-active');
+               });
+           });
+   
+            // Evento de clique para exibir respostas
+            $(document).on('click', '.comentarios-repostas', function() {
+               var commentId = $(this).data('comment-id');
+               var respostaList = $('.respostas-lista-' + commentId);
+               if (respostaList) {
+                   respostaList.toggle();
+               }
+           });
+   
+           $('.comentarios-repostas').click(function(){
+               var commentId = $(this).data('comment-id');
+               var respostaList = $('.respostas-lista-' + commentId);
+               if (respostaList.css('display') == 'none') {
+                   respostaList.css('display', 'block');
+                   $(this).html('Ocultar respostas');
+               } else {
+                   respostaList.css('display', 'none');
+                   $(this).html('Ver comentários');
+               }
+           });
+       }
+   
+       // Adicionando os listeners iniciais
+       addEventListeners();
+   
+       // Submissão do formulário de comentários
+       $(".comentario-form").on('submit', function(event){
+           event.preventDefault();
+       
+           let form = $(this);
+           let postId = form.find('input[name="post-id"]').val();
+       
+           $.ajax({
+               url: form.attr('action'), 
+               data: form.serialize(),
+               type: 'POST',
+               dataType: 'json', 
+               success: function(response){
+                   let dateISO = response.data;
+                   let date = new Date(dateISO);
+                   let formattedDate = date.toLocaleDateString();
+   
+                   let newComment = `
+                   <li style="border-bottom: solid 1px #a4a4a4;">
+                       <div class="comentario-parte1">
+                           <span class="comentario-img">
+                               <img src="${response.authorImage}">
+                           </span>
+                           <span class="comentario-nome"> 
+                               ${response.authorComentario}
+                           </span>
+                           <span class="comentario-data">
+                               ${formattedDate}
+                           </span>
+                       </div>
+                       <span class="comentario-texto">
+                           ${response.content}
+                       </span>
+                       <div class="comentario-parte2" data-comment-id="${response.commentId}">
+                           <span class="like" data-commentid="${response.commentId}">
+                               <i class="fa-solid fa-thumbs-up" style="color: #ffffff;"></i>
+                           </span>
+                           <span class="dislike">
+                               <i class="fa-solid fa-thumbs-down" style="color: #ffffff;"></i>
+                           </span>
+                           <span class="comentario-responder" data-comment-id="${response.commentId}">
+                               Responder   
+                           </span>
+                       </div>
+                       <span class="comentarios-repostas" data-comment-id="${response.commentId}">
+                           Ver <br> 
+                           <span id="count-comments-${response.commentId}" class="count-comments">
+                               &nbsp;0&nbsp;
+                           </span>
+                           comentários
+                       </span>
+                       <ul id="respostas-lista-${response.commentId}" class="respostas-lista oculto" data-comment-id="${response.commentId}" style="display: none;"></ul>
+                   </li>
+                   
+               `;
+         
+           
+              
+                   $('textarea[name="comentario"]').val('');
+                   $('input[name="comentario"]').val('');
+                
+                   $('.comments-list[data-post-id="' + postId + '"]').prepend(newComment);
+   
+                   // agora, adicione o ouvinte de evento ao novo botão "Responder"
+                   addEventListeners();
+                 
+   
+                   
+                   
+                     // Evento de clique no botão de resposta
+    
+                     alertComentario1()
+               },
+               error: function(error){
+                   alert('Erro');
+               }
+           });
+       });
+   
+     
+   
+       // Submissão do formulário de resposta
+       $(".respostaForm").on('submit', function(event) {
+           event.preventDefault();
+       
+           let form = $(this);
+           let commentId = form.find('.comment-id-field').val();
+       
+           if (!commentId) {
+               console.log('O campo comment-id-field não existe ou não tem um valor');
+               return;
+           }
+       
+           let formActionUrl = "/resposta/" + commentId + "/";
+       
+           $.ajax({
+               type: 'POST',
+               url: formActionUrl,
+               data: form.serialize(),
+               dataType: 'json',
+               success: function(response) {
+                   // Cria uma nova resposta
+                   let newResposta = `
+                   <li style="border-bottom:solid 1px #a4a4a4;">
+                       <div class="comentario-parte1">
+                           <span class="comentario-img">
+                               <img src="${response.authorImage}">
+                           </span>
+                        
+                               <span class="comentario-nome">
+                                   ${response.authorResposta}
+                               </span>
+                               <span class="comentario-data">
+                                   ${response.data}
+                               </span>
+                           </div>
+                               <span class="comentario-texto">
+                                   ${response.content}
+                               </span>
+                           
+                       </li>
+                   `;
+                   
+                   // Cria uma nova lista se não existir, ou adiciona a resposta na lista existente
+                   let respostaLista = $('.respostas-lista-' + commentId);
+                   if (respostaLista.length) {
+                       respostaLista.prepend(newResposta);
+                   } else {
+                       let newRespostaLista = `
+                           <ul style="margin-left:1.4rem;" class="respostas-lista-${commentId}">
+                               ${newResposta}
+                           </ul>
+                       `;
+                       // Anexa a nova lista após o elemento .comentarios-respostas
+                       $('.comentarios-repostas[data-comment-id="' + commentId + '"]').after(newRespostaLista);
+       
+                       // Definir respostaLista para a nova lista criada para futuras respostas
+                       respostaLista = $('.respostas-lista-' + commentId);
+                   }
+       
+                   // Aumentar a contagem de respostas em 1
+                   let countComments = $('.count-comments-' + commentId);
+                   if (countComments.length) {
+                       let currentCount = parseInt(countComments.text());
+                       currentCount += 1; // Increment the current count
+                       countComments.text(' ' + currentCount + ' ');
+               
+                       if (currentCount === 0) {
+                           $('.comentarios-repostas[data-comment-id="' + commentId + '"]').hide();
+                       } else {
+                           $('.comentarios-repostas[data-comment-id="' + commentId + '"]').show();
+                       }
+                   }
+               }
+           });
+       });
+   });
+   $('.add-comentario-box').click(function() {
+       if ($(this).hasClass('user-not-logged-in')) {
+           // O usuário não está logado, não faça nada.
+           return;
+       }
+   
+   
+       var postId = $(this).data('post-id');  // Obter a ID do post do botão
+       var formAction = "{% url 'blog:enviar_comentario' post_id=12345 %}".replace('12345', postId);  // Gerar a URL para o formulário
+       var postTitle = $(this).data('post-title');  // Obter o título do post do botão
+   
+   
+       // Atualizar o atributo action do formulário no modal
+       $('.modal-add-comentario .comentario-form').attr('action', formAction);
+   
+       // Atualizar o valor do campo hidden no formulário do modal
+       $('.modal-add-comentario .comentario-form input[name="post-id"]').val(postId);
+   
+         // Atualizar o título no modal
+       $('.modal-add-comentario .modal-comentario-header h3').text(postTitle);
+   
+       // ... Código para abrir o modal
+   });
+   
+   
+   
+   
+   
+   
+   
+   
+   $('body').on('click', '.comentarios-repostas', function(){
+   var commentId = $(this).data('comment-id');
+   var respostaList = $('.respostas-lista-' + commentId);
+   let countComments = $('.count-comments-' + commentId);
+   let currentCount = 0;
+   if (countComments.length) {
+       currentCount = parseInt(countComments.text());
+   }
+   
+   if (currentCount === 0) {
+       respostaList.css('display', 'none');
+       $(this).html('Ver comentários');
+   } else if (respostaList.css('display') == 'none') {
+       respostaList.css('display', 'block');
+       $(this).html('Ocultar respostas');
+   } else {
+       respostaList.css('display', 'none');
+       $(this).html('Ver ' + currentCount + ' comentários');
+   }
+   });
+   
+   $(document).ready(function() {
+   $('.respostas-lista').each(function() {
+       if ($(this).find('li').length === 0) {
+           let commentId = $(this).data('comment-id');
+           $('.comentarios-repostas[data-comment-id="' + commentId + '"]').hide();
+       }
+   });
+   });
+</script>
+<script>
+   $(window).on('load', function() {
+       $('.responsive-iframe').each(function() {
+           $(this).attr('src', $(this).data('src'));
+       });
+   });
+</script>
+<script>
+   $(window).on('load', function() {
+       $('.iframe-popup').each(function() {
+           $(this).attr('src', $(this).data('src'));
+       });
+   });
+</script>
+<script>
+    document.getElementById('fileInput').addEventListener('change', function (e) {
+        var fileSize = e.target.files[0].size / 1024 / 1024; // in MB
+        if (fileSize > 2) { // replace with the size limit you want
+            var customAlert = document.querySelector('.alert-container1');
+            var alertText = document.querySelector('.alert-text');
+            
+            alertText.innerHTML = "O arquivo deve ser menor que 2MB";
+            customAlert.style.display = 'flex'; // show the custom alert
+            
+            document.querySelector('.fechar_alert1').addEventListener('click', function() {
+                customAlert.style.display = 'none'; // hide the custom alert on close button click
+            });
+            customAlert.addEventListener('click', function(event)
+            {   evet.stopPropagation()
+                if(event.target === "customAlert")
+                {
+                    customAlert.style.display = 'none'
+                }
+            })
+            
+            e.target.value = null; // clear the input
+        }
+    });
+    
+</script>
+<script src="/static/base/js/clamp.js"></script>
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+       var myElements = document.querySelectorAll('.post-text');
+       myElements.forEach(function(element) {
+           $clamp(element, {clamp: 6});
+       });
+   });
+   </script>
+
+   <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          var myElements = document.querySelectorAll('.post-text1');
+          myElements.forEach(function(element) {
+              $clamp(element, {clamp: 3});
+          });
+      });
+      </script>
+   
+   
+   
+   
+   
+   
+   
+
+{% endblock  %}

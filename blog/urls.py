@@ -22,7 +22,10 @@ urlpatterns = [
     path('vote_comment/', vote_comment, name='vote_comment'),
     path('editarPerfil/', editarPerfil, name='editarPerfil'),
     path('resposta/<int:comment_id>/', enviar_resposta, name='enviar_resposta'),
-    path('atualizar-perfil/', update_profile, name='update_profile')
+    path('atualizar-perfil/', update_profile, name='update_profile'),
+    path('videos', video_page, name='video_page'),
+    path('video_page/<int:page>/', video_page, name='video_page_post'),
+
     
    
 

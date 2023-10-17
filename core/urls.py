@@ -6,6 +6,7 @@ from django.views.static import serve
 
 urlpatterns = [
     path('HZsC9>G5dC5FLcc4F=Ug}kq[)B~[nUNKs"-:JxqLQ"h9B2pqcX+SWm-.7]t/>@k~-wrdrp3$S-ocesarbeckpolitik/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include("blog.urls", namespace="home")),
     path("unicorn/", include("django_unicorn.urls")),
 
