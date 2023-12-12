@@ -25,6 +25,8 @@ urlpatterns = [
     path('atualizar-perfil/', update_profile, name='update_profile'),
     path('videos', video_page, name='video_page'),
     path('video_page/<int:page>/', video_page, name='video_page_post'),
+    path('livroPublicado/', livroPublicado, name='livro_publicado'  ),
+    path('livroPublicado/<int:page>/', livroPublicado, name='livro_publicado_post'),
 
     
    

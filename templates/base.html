@@ -39,8 +39,10 @@
                <li><a href="{% url 'blog:materias_default' %}">Matérias</a></li>
                <li><a href="{% url 'blog:video_page' %}">Vídeos</a></li>
                <li><a href="{% url 'blog:artigos-academicos_default' %}">Artigos Acadêmicos</a></li>
+               <li><a href="{% url 'blog:livro_publicado' %}">Livro Publicado</a></li>
                <li><a href="{% url 'blog:sobre-mim' %}">Sobre mim</a></li>
                <li><a href="{% url 'blog:contato' %}">Contato</a></li>
+
                {%if usuario%}
                <li><a onclick="abrirEditarPerfil()"> Editar Perfil</a></li>
                <li>  <a href="{% url 'blog:sair' %}">Sair</a></li>
@@ -74,6 +76,7 @@
          <a href="{% url 'blog:home' %}">Home</a>
          <a  href="{% url 'blog:materias_default' %}">Matérias</a>
          <a href="{% url 'blog:artigos-academicos_default' %}">Artigos Acadêmicos</a>
+         <li><a href="{% url 'blog:livro_publicado' %}">Livro Publicado</a></li>
          <a href="{% url 'blog:sobre-mim' %}">Sobre mim</a>
          <a href="{% url 'blog:contato' %}">Contato</a>
          {%if usuario%}
@@ -109,17 +112,15 @@
 
          <li><a  href="{{ redes_sociais.Linkedin }}" target="_blank"><img class="footer-img linkedin-footer"  src="{% static 'base/img/linkedin.png' %}"></a></li>
 
-         <li><a  href="{{ redes_sociais.academia_edu }}" target="_blank"><img class="footer-img acadEdu-footer" src="{% static 'base/img/c(semfundo).png' %}"></a></li>
+         <li><a  href="{{ redes_sociais.Lattes }}" target="_blank"><img class="footer-img acadEdu-footer" src="{% static 'base/img/c(semfundo).png' %}"></a></li>
 
-         <li><a   href="{{ redes_sociais.orcid }}" target="_blank"><img class="footer-img orcid-footer" src="{% static 'base/img/id(semfundo).png' %}"></a></li>
+         <li><a   href="{{redes_sociais.orcid  }}" target="_blank"><img class="footer-img orcid-footer" src="{% static 'base/img/id(semfundo).png' %}"></a></li>
 
-         <li><a  href="{{ redes_sociais.Lattes }}" target="_blank"><img class="footer-img lattes-footer" src="{% static 'base/img/a(semfundoo).png' %}"></a></li>
+         <li><a  href="{{ redes_sociais.academia_edu}}" target="_blank"><img class="footer-img lattes-footer" src="{% static 'base/img/a(semfundoo).png' %}"></a></li>
 
          <li><a  href="{{ redes_sociais.gmail }}" target="_blank"><img class="footer-img gmail-footer" src="{% static 'base/img/gmail.png' %}"></a></li>
 
-         <li><a  href="{{ redes_sociais.discord }}" target="_blank"><img class="footer-img ds-footer" src="{% static 'base/img/discord.png' %}"></a></li>
 
-         <li><a  href="{{ redes_sociais.playstation }}" target="_blank"><img class="footer-img psn-footer" src="{% static 'base/img/playstation.png' %}"></a></li>
       </nav>
 
 
@@ -146,17 +147,15 @@
 
                  <li><a class="footer-img " href="{{ redes_sociais.Linkedin }}" target="_blank"><img class="linkedin-footer" src="{% static 'base/img/linkedin.png' %}"></a></li>
 
-                 <li><a class="footer-img" href="{{ redes_sociais.academia_edu }}" target="_blank"><img class="acadEdu-footer" src="{% static 'base/img/c(semfundo).png' %}"></a></li>
+                 <li><a class="footer-img" href="{{ redes_sociais.Lattes }}" target="_blank"><img class="acadEdu-footer" src="{% static 'base/img/c(semfundo).png' %}"></a></li>
 
                  <li><a class="footer-img"  href="{{ redes_sociais.orcid }}" target="_blank"><img class="orcid-footer" src="{% static 'base/img/id(semfundo).png' %}"></a></li>
 
-                 <li><a class="footer-img" href="{{ redes_sociais.Lattes }}" target="_blank"><img class=" lattes-footer" src="{% static 'base/img/a(semfundoo).png' %}"></a></li>
+                 <li><a class="footer-img" href="{{ redes_sociais.academia_edu }}" target="_blank"><img class=" lattes-footer" src="{% static 'base/img/a(semfundoo).png' %}"></a></li>
 
                  <li><a class="footer-img" href="{{ redes_sociais.gmail }}" target="_blank"><img class="gmail-footer" src="{% static 'base/img/gmail.png' %}"></a></li>
 
-                 <li><a class="footer-img " href="{{ redes_sociais.discord }}" target="_blank"><img class="ds-footer" src="{% static 'base/img/discord.png' %}"></a></li>
-
-                 <li><a class="footer-img " href="{{ redes_sociais.playstation }}" target="_blank"><img class="psn-footer" src="{% static 'base/img/playstation.png' %}"></a></li>
+               
                  {% endfor %}
                </ul>
               <div style="text-align:right;" class="direitos">

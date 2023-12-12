@@ -62,6 +62,17 @@ class ArtigoAcademiaco(models.Model):
         return self.titulo
 
 
+class LivroPublicado(models.Model):
+    titulo = models.TextField(null=False, blank=False)
+    image = models.ImageField(upload_to='images/', null=False, blank=False)
+    descricao =  models.TextField(null=False, blank=False)
+    link = models.URLField(null=True, blank=True)
+    popup = models.URLField(null=True, blank=True)
+    
+    def __str__(self) -> str:
+        return self.titulo
+
+
 class Contato(models.Model):
     instagram = models.URLField(null=True, blank=True)
     tiktok = models.URLField(null=True, blank=True)

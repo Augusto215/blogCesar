@@ -7,6 +7,7 @@ from .models import *
 admin.site.register(Usuario)
 admin.site.register(SobreMim)
 admin.site.register(ArtigoAcademiaco)
+admin.site.register(LivroPublicado)
 admin.site.register(Materias)
 admin.site.register(Contato)
 

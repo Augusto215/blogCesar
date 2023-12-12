@@ -6,7 +6,9 @@
 {% endif %}
 <section id="postagens">
 <section class="align-auto" style="margin:auto;">
-
+    <div class="grid-text">
+        <h1>Vídeos:</h1>
+     </div>
    {% for post in page_obj %}
    {%comment%} Post.Audio {%endcomment%}
    {% if post.audio and not post.image.name and not post.post and not post.video %}

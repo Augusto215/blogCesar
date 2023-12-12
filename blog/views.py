@@ -145,6 +145,26 @@ def artisgosAcademicos(request, page=1):
 
 
 
+def livroPublicado(request, page=1):
+    redes_sociais = Contato.objects.all()
+    livros = LivroPublicado.objects.all()
+    paginator = Paginator(livros, 6)
+    page_obj = paginator.get_page(page)
+    usuario = None
+    if 'usuario' in request.session:
+        usuario = Usuario.objects.get(id=request.session['usuario'])
+
+    
+    context = {
+        'page_obj':page_obj,
+        'redes_sociais':redes_sociais,
+        'usuario':usuario
+    }
+    
+    return render(request, 'blog/livroPublicado.html', context)
+
+
+
 def contato(request):
     redes_sociais = Contato.objects.all()
     usuario = None

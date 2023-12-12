@@ -1,0 +1,361 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block  'conteudo' %}
+<section class="grid-section">
+   <div class="grid-text">
+      <h1>Livro Publicado:</h1>
+   </div>
+   <div class="grid-container">
+      {% for artigo in page_obj  %}
+      <div class="grid-item-container center-text">
+         <div class="title center-text">
+            <p style="font-size:1.2rem;font-weight:600;">
+               {% if artigo.popup %}
+               <a class="abrir-popup321">
+                  {{artigo.titulo}}
+               </a>
+            
+
+               <div class="modal-container-popup321">
+                  <div class="modal-popup" style="position:relative">
+                     <iframe class="iframe-popup responsive-iframe" data-src="{{artigo.popup}}" width="100%" height="80%" allow="autoplay"></iframe>
+                     <button class="fechar-modal-popup321" style="
+                        position: absolute;
+                        top: -15px;
+                        right: -15px;
+                        width: 2rem;
+                        height: 2rem;
+                        z-index: 999;
+                        border-radius: 50%;
+                        border: 2px solid #fff;
+                        background-color: rgb(54,54,54);
+                        font-size: 1.3em;
+                        color: #fff;
+                        cursor: pointer;
+                        box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                        outline:none;"
+                        >x</button>
+                  </div>
+               </div>
+               {% else %}
+               {{artigo.titulo}}
+               {% endif %}
+            </p>
+         </div>
+         <div class="ler-mais-div">
+            <span style="font-size:1rem; cursor:pointer;" class="ler-mais-artigos clicar-artigos"> Ler mais... </span> 
+         </div>
+     
+       
+            <div class="lerArtigos-container">
+               <div class="modal-artigos" style="width:85%; background-color:#2a2a2d;
+               border:solid #fff 2px; padding:.8rem; position:relative;">
+               <p style="overflow-y:scroll; height:10rem;">
+              {{artigo.titulo}}</p>
+                  <button class="fechar-modal-artigos" style="
+                     position: absolute;
+                     top: -15px;
+                     right: -15px;
+                     width: 2rem;
+                     height: 2rem;
+                     z-index: 999;
+                     border-radius: 50%;
+                     border: 2px solid #fff;
+                     background-color: rgb(54,54,54);
+                     font-size: 1.3em;
+                     color: #fff;
+                     cursor: pointer;
+                     box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                     outline:none;"
+                     >x</button>
+               </div>
+            </div>
+            <div class="grid-item">
+               {% if artigo.popup %}
+               <a class="abrir-popup321">
+                  <img class="grid-img" src="{{artigo.image.url}}">
+                  </a>
+                  <div class="modal-container-popup321">
+                     <div class="modal-popup" style="position:relative">
+                         <iframe class="iframe-popup responsive-iframe" data-src="{{artigo.popup}}" width="100%" height="80%" allow="autoplay"></iframe>
+                         <button class="fechar-modal-popup321" style="
+                         position: absolute;
+                         top: -15px;
+                         right: -15px;
+                         width: 2rem;
+                         height: 2rem;
+                         z-index: 999;
+                         border-radius: 50%;
+                         border: 2px solid #fff;
+                         background-color: rgb(54,54,54);
+                         font-size: 1.3em;
+                         color: #fff;
+                         cursor: pointer;
+                         box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                         outline:none;"
+                         >x</button>
+                     </div>
+                 </div>
+                 {%else%}
+                 <img class="grid-img" src="{{artigo.image.url}}">
+
+               {% endif %}
+           </div>
+           
+         <div  class="description center-text"><p style="font-size:1rem">{{artigo.descricao|safe}}</p></div>
+       
+            <span style="font-size:1rem; cursor:pointer;" class="ler-mais-descricao clicar-descricao"> Ler mais... </span> 
+
+            <div class="lerDescricao-container">
+               <div class="modal-artigos" style="width:85%; background-color:#2a2a2d;
+               border:solid #fff 2px; padding:.8rem; position:relative;">
+               <p style="overflow-y:scroll; height:10rem;">
+              {{artigo.descricao}}</p>
+                  <button class="fechar-modal-descricao" style="
+                     position: absolute;
+                     top: -15px;
+                     right: -15px;
+                     width: 2rem;
+                     height: 2rem;
+                     z-index: 999;
+                     border-radius: 50%;
+                     border: 2px solid #fff;
+                     background-color: rgb(54,54,54);
+                     font-size: 1.3em;
+                     color: #fff;
+                     cursor: pointer;
+                     box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
+                     outline:none;"
+                     >x</button>
+               </div>
+            </div>
+
+      </div>
+      {% endfor %}
+   </div>
+
+   <!-- Start Pagination -->
+   <!-- End Pagination -->
+</section>
+<div class="pagination-div">
+   <ul class="pagination">
+      {% if page_obj.has_previous %}
+      <li><a href="{% url 'blog:materias' page_obj.previous_page_number %}">&lt;</a></li>
+      {% endif %}
+      <li><a class="active" href="#0">{{ page_obj.number }}</a></li>
+      {% if page_obj.has_next %}
+      <li><a href="{% url 'blog:materias' page_obj.next_page_number %}">&gt;</a></li>
+      {% endif %}
+   </ul>
+</div>
+{% endblock%}
+{% block 'js' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+<script>
+   let modalPopup321 = document.querySelectorAll('.modal-container-popup321')
+   let abrirPopup321 = document.querySelectorAll('.abrir-popup321')
+   let fecharPopup321 = document.querySelectorAll('.fechar-modal-popup321')
+   abrirPopup321.forEach((button, index) => {
+      button.addEventListener('click', function() {
+         modalPopup321[index].classList.add('is-active');
+      });
+   });
+
+   fecharPopup321.forEach((fechar, index) =>
+   {
+      fechar.addEventListener('click', function() {
+         modalPopup321[index].classList.remove('is-active');
+      })
+   })
+
+   modalPopup321.forEach((modal) =>
+   {
+      modal.addEventListener('click',function(event)
+      {
+      event.stopPropagation()
+      if(event.target === modal) 
+      {
+         this.classList.remove('is-active')
+      }
+   })
+   })
+</script>
+
+
+<script src="{% static 'base/js/artigos.js'%}"></script>
+
+<script src="/static/base/js/clamp.js"></script>
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+       var myElements = document.querySelectorAll('.title');
+       myElements.forEach(function(element) {
+           $clamp(element, {clamp: 2});
+       });
+   });
+   </script>
+
+   <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          var myElements = document.querySelectorAll('.description');
+          myElements.forEach(function(element) {
+              $clamp(element, {clamp: 4});
+          });
+      });
+      </script>
+   
+   
+      
+   
+   <script>
+
+      function checkOverflow3() {
+         var collapsesArtigos = document.querySelectorAll('.title');
+         var verMais1ButtonsArtigos = document.querySelectorAll('.ler-mais-artigos');
+         var Comentarios1Artigos = document.querySelectorAll('.comentarios2');
+      
+
+       
+
+         collapsesArtigos.forEach((collapse, index) => {
+             var isOverflowing3 = collapse.scrollHeight > collapse.clientHeight || collapse.scrollWidth > collapse.clientWidth;
+     
+             if (isOverflowing3) {
+                 // Mostrar o botão correspondente
+                 verMais1ButtonsArtigos[index].style.display = 'block';
+                
+             } else {
+                 // Esconder o botão correspondente e mostrar os comentários
+                 verMais1ButtonsArtigos[index].style.display = 'none';
+          
+             }
+         });
+     
+     }
+   
+   
+     // Verifica o overflow quando a página é carregada
+     window.addEventListener('DOMContentLoaded', checkOverflow3);
+     
+     // Verifica o overflow sempre que a janela é redimensionada
+     window.addEventListener('resize', checkOverflow3);
+     
+     let lerArtigosContainer = document.querySelectorAll('.lerArtigos-container')
+     let verMaisArtigos = document.querySelectorAll('.clicar-artigos');
+     let fecharArtigosTitulo = document.querySelectorAll('.fechar-modal-artigos')
+     verMaisArtigos.forEach((ler, index) =>
+     {
+        ler.addEventListener('click', function()
+        {
+           lerArtigosContainer[index].classList.add('is-active')
+        })
+     })
+
+
+     
+     fecharArtigosTitulo.forEach((fechar, index) =>
+     {
+     fechar.addEventListener('click', function()
+     {
+      
+         lerArtigosContainer[index].classList.remove('is-active')
+      
+      
+     })})
+   
+     lerArtigosContainer.forEach((ler, index) =>
+     {
+      ler.addEventListener('click', function(event)
+   
+      {  event.stopPropagation()
+         if(event.target === ler)
+         {
+            lerArtigosContainer[index].classList.remove('is-active')
+         }
+      })
+     })
+   
+     
+     function checkOverflow4() {
+      var collapsesDescricao = document.querySelectorAll('.description');
+      var verMais1ButtonsDescricao = document.querySelectorAll('.ler-mais-descricao');
+    
+   
+
+    
+
+      collapsesDescricao.forEach((collapse, index) => {
+          var isOverflowing4 = collapse.scrollHeight > collapse.clientHeight || collapse.scrollWidth > collapse.clientWidth;
+  
+          if (isOverflowing4) {
+              // Mostrar o botão correspondente
+              verMais1ButtonsDescricao[index].style.display = 'block';
+             
+          } else {
+              // Esconder o botão correspondente e mostrar os comentários
+              verMais1ButtonsDescricao[index].style.display = 'none';
+       
+          }
+      });
+  
+  }
+
+
+  // Verifica o overflow quando a página é carregada
+  window.addEventListener('DOMContentLoaded', checkOverflow4);
+  
+  // Verifica o overflow sempre que a janela é redimensionada
+  window.addEventListener('resize', checkOverflow4);
+
+  let lerArtigosDescricao = document.querySelectorAll('.lerDescricao-container')
+  let fecharArtigosDescricao = document.querySelectorAll('.fechar-modal-descricao')
+  let verMaisDescricao = document.querySelectorAll('.clicar-descricao');
+  verMaisDescricao.forEach((ler, index) =>
+  {
+     ler.addEventListener('click', function()
+     {
+        lerArtigosDescricao[index].classList.add('is-active')
+     })
+  })
+
+  
+  fecharArtigosDescricao.forEach((fechar, index) =>
+  {
+  fechar.addEventListener('click', function()
+  {
+   
+      lerArtigosDescricao[index].classList.remove('is-active')
+   
+   
+  })})
+
+  lerArtigosDescricao.forEach((ler, index) =>
+  {
+   ler.addEventListener('click', function(event)
+
+   {  event.stopPropagation()
+      if(event.target === ler)
+      {
+         lerArtigosDescricao[index].classList.remove('is-active')
+      }
+   })
+  })
+   </script>
+
+
+   <script>
+      $(window).on('load', function() {
+          $('.responsive-iframe').each(function() {
+              $(this).attr('src', $(this).data('src'));
+          });
+      });
+   </script>
+
+    
+
+
+
+{% endblock  %}
+
